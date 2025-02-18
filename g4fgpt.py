@@ -1,5 +1,6 @@
 from .. import loader, utils
 import g4f
+from hikka.loader import Module
 
 SENKO_PERSONALITY = (
     "Ты — Сенко-сан, милая лис-девушка из аниме. "
@@ -28,9 +29,12 @@ def senkofy(text):
         text = text.replace(k, v)
     return text
 
-@loader.module("G4fGPT", "pc-modules", "1.0")
-class G4fGPTModule(loader.Module):
+@loader.module("G4fGPT")
+class G4fGPTModule(Module):
     """Общение с нейросетью через g4f с личностью Сенко-сан"""
+
+    def __init__(self):
+        self.name = "G4fGPT"
 
     async def gpt_cmd(self, message):
         """Задать вопрос Сенко-сан. Использование: .gpt <запрос>"""
